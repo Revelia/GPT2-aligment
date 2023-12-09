@@ -1,4 +1,4 @@
-### GPT-2 aligment using BERT classifier
+# GPT-2 aligment using BERT classifier
 
 ## Введение
 
@@ -13,11 +13,11 @@
 
 Как было ранее отмечено, в качестве генеративной SFT(supervised fine tuned) модели была использована [GPT-2 обученную на imbd датасете](https://huggingface.co/lvwerra/gpt2-imdb) для генерации отзывов на фильмы. В качестве reward функции мы взяли [BERT](https://huggingface.co/lvwerra/distilbert-imdb) модель, которая классифицирует отзывы на положительные/негативные.
 
-# Генерация
+### Генерация
 
 При помощи GPT-2 было сгенерированно 1000 отзывов и посчитан reward для каждого (generate_text.py)
 
-# Создание датасета
+### Создание датасета
 Далее было составлено 2000 пар winner-loser, которые в дальнейшем будут использоваться как датасет для обучения DPO (prepare_dataset.py)
 
 При помощи dpo Trainer зафайнтьюнили GPT-2 (main.py) и посчитали распределние reward по отзывам(calculate_metrics.py)
