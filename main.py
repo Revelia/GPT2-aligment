@@ -2,6 +2,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSequen
 from transformers import TrainingArguments
 import torch
 import pickle
+import sys
 import datasets
 import os
 from trl import DPOTrainer
@@ -10,6 +11,7 @@ import pandas as pd
 
 
 if __name__ == '__main__':
+    loss = sys.argv[0]
     max_length = 128
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     path_to_dataset = 'data/train_dataset.pkl'
@@ -43,7 +45,7 @@ if __name__ == '__main__':
         beta=0.1,
         max_prompt_length=1,
         max_length=256,
-        loss_type="hinge",
+        loss_type=loss,
         train_dataset=train_dataset,
         tokenizer=tokenizer,
     )
