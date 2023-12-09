@@ -9,7 +9,7 @@
 
 Мы использовали подход [SLiC-HF](https://arxiv.org/pdf/2305.10425.pdf)
 
-##pipeline
+## Pipeline
 
 Как было ранее отмечено, в качестве генеративной SFT(supervised fine tuned) модели была использована [GPT-2 обученную на imbd датасете](https://huggingface.co/lvwerra/gpt2-imdb) для генерации отзывов на фильмы. В качестве reward функции мы взяли [BERT](https://huggingface.co/lvwerra/distilbert-imdb) модель, которая классифицирует отзывы на положительные/негативные.
 
