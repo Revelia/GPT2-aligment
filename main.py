@@ -11,7 +11,7 @@ import pandas as pd
 
 
 if __name__ == '__main__':
-    loss = sys.argv[0]
+    loss = sys.argv[1]
     max_length = 128
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     path_to_dataset = 'data/train_dataset.pkl'
