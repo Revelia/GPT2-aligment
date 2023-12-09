@@ -55,10 +55,10 @@ def generate_dataset(model, tokenizer, model_eval, tokenizer_eval, size = 512):
     device = model.device
     while size > 0:
         torch.cuda.empty_cache()
-        samples_list = generate_samples(model, tokenizer, device, size = min(250,size))
+        samples_list = generate_samples(model, tokenizer, device, size = min(25,size))
         rewards = evaluate_samples(model_eval, tokenizer_eval, samples_list, device)
         evaluated_texts[:0] = [(text, reward) for text, reward in zip(samples_list, rewards)]
-        size -= 250
+        size -= 25
     return evaluated_texts
 
 
