@@ -34,7 +34,7 @@ def calculate_metrics(model,
     """
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-    samples = generate_samples(model, tokenizer, device, size=300)
+    samples = generate_samples(model, tokenizer, device, size=100)
     reward = evaluate_samples(model_reward, tokenizer_reward, samples, device)
     torch.tensor(reward).mean()
 
@@ -42,7 +42,7 @@ def calculate_metrics(model,
     gc.collect()
     torch.cuda.empty_cache()
 
-    test_samples = generate_samples(model_ft, tokenizer_ft, device, size=300)
+    test_samples = generate_samples(model_ft, tokenizer_ft, device, size=100)
     test_reward = evaluate_samples(model_reward, tokenizer_reward, test_samples, device)
     print(f"avg reward:{torch.tensor(test_reward).mean()}")
 
