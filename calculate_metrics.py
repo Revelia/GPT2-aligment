@@ -59,7 +59,7 @@ def calculate_metrics(model,
     pyplot.hist(y, bins, alpha=0.5, label='GPT2')
     pyplot.legend(loc='upper right')
     pyplot.show()
-    image_path = f"images/{loss}"
+    image_path = f"images/{loss}.png"
     os.makedirs(os.path.dirname(image_path), exist_ok=True)
     pyplot.savefig(image_path)
 
