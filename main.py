@@ -49,8 +49,9 @@ if __name__ == '__main__':
         train_dataset=train_dataset,
         tokenizer=tokenizer,
     )
-
+    path = f"models/{loss}"
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     dpo_trainer.train()
-    dpo_trainer.save_model("models/hinge")
+    dpo_trainer.save_model(path)
 
 
