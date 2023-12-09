@@ -59,15 +59,12 @@ def calculate_metrics(model,
     pyplot.hist(y, bins, alpha=0.5, label='GPT2')
     pyplot.legend(loc='upper right')
     pyplot.show()
-    image_path = f"images/{image_name}"
+    image_path = f"images/{loss}"
     os.makedirs(os.path.dirname(image_path), exist_ok=True)
     pyplot.savefig(image_path)
 
 if __name__ == '__main__':
     loss = sys.argv[1]
-    from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSequenceClassification
-    import torch
-    import pickle
 
     max_length = 128
 
