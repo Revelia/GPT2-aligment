@@ -1,0 +1,1 @@
+{"model avg reward": 0.5068182349205017, "model std reward": 1.9113601446151733, "model diversity": 5.9830421217989445, "model_ft avg reward": 2.71589732170105, "model_ft std reward": 0.1835276186466217, "model_ft diversity": 4.155324204293495}
