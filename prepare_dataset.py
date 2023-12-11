@@ -1,10 +1,7 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSequenceClassification
-import torch
 import pickle
 import datasets
 import pandas as pd
 import random
-import os
 
 
 def build_pairs(data, size):
@@ -29,7 +26,7 @@ if __name__ == '__main__':
     path_to_processed = 'data/train_dataset.pkl'
     with open(path_to_raw, 'rb') as f:
         evaluated_texts = pickle.load(f)
-    train_dataset = build_pairs(evaluated_texts, 2000)
+    train_dataset = build_pairs(evaluated_texts, 20000)
 
     with open(path_to_processed, 'wb') as f:
         pickle.dump(train_dataset, f)

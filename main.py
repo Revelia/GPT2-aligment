@@ -3,15 +3,14 @@ from transformers import TrainingArguments
 import torch
 import pickle
 import sys
-import datasets
 import os
 from trl import DPOTrainer
-import accelerate
-import pandas as pd
+
 
 
 if __name__ == '__main__':
     loss = sys.argv[1]
+    beta = float(sys.argv[2])
     max_length = 128
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     path_to_dataset = 'data/train_dataset.pkl'
@@ -42,14 +41,14 @@ if __name__ == '__main__':
     dpo_trainer = DPOTrainer(
         model,
         args=training_args,
-        beta=0.1,
+        beta=beta,
         max_prompt_length=1,
         max_length=256,
         loss_type=loss,
         train_dataset=train_dataset,
         tokenizer=tokenizer,
     )
-    path = f"models/{loss}"
+    path = f"models/{loss} beta={beta}"
     os.makedirs(os.path.dirname(path), exist_ok=True)
     dpo_trainer.train()
     dpo_trainer.save_model(path)
