@@ -16,11 +16,11 @@ def generate_and_evaluate(model, tokenizer, bert_model, bert_tokenizer, size):
     reward = []
     device = model.device
     while size > 0:
-        new_samples = generate_samples(model, tokenizer, size=25)
+        new_samples = generate_samples(model, tokenizer, size=100)
         new_reward = evaluate_samples(bert_model, bert_tokenizer, new_samples)
         samples += new_samples
         reward += new_reward
-        size -= 25
+        size -= 100
 
     return samples, reward
 
@@ -65,6 +65,7 @@ def calculate_metrics(model,
                                             size=5000)
 
     metrics["model avg reward"] = float(torch.tensor(reward).mean())
+    metrics["model std reward"] = float(torch.tensor(reward).std())
     diversity = token_entropy(samples, tokenizer_ft)
     metrics["model diversity"] = diversity
 
@@ -77,6 +78,7 @@ def calculate_metrics(model,
                                                       size=5000)
 
     metrics["model_ft avg reward"] = float(torch.tensor(test_reward).mean())
+    metrics["model_ft std reward"] = float(torch.tensor(test_reward).std())
     diversity = token_entropy(test_samples, tokenizer_ft)
     metrics["model_ft diversity"] = diversity
     del model_ft
