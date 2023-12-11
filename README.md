@@ -26,7 +26,7 @@ pip install datasets
 python3 text_generation.py
 python3 prepare_dataset.py
 ```
-Для обучения и оценки модели с заданным loss=hinge/sigmoid и beta нужно запустить скрипт:
+Для обучения и оценки модели с заданным *loss=hinge/sigmoid* и *beta* нужно запустить скрипт:
 ```
 python3 fine_tune.py loss beta
 python3 calculate_metrics.py loss beta
