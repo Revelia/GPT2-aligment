@@ -12,9 +12,16 @@ from datetime import datetime
 
 
 def generate_and_evaluate(model, tokenizer, bert_model, bert_tokenizer, size):
+    """
+    :param model: generative model
+    :param tokenizer: generative model tokenizer
+    :param bert_model: reward model
+    :param bert_tokenizer: reward model tokenizer
+    :param size: number of samples to generate
+    :return: samples -- generated samples, reward -- reward of samples
+    """
     samples = []
     reward = []
-    device = model.device
     while size > 0:
         new_samples = generate_samples(model, tokenizer, size=100)
         new_reward = evaluate_samples(bert_model, bert_tokenizer, new_samples)
@@ -25,8 +32,12 @@ def generate_and_evaluate(model, tokenizer, bert_model, bert_tokenizer, size):
     return samples, reward
 
 
-
 def token_entropy(generations, tokenizer):
+    """
+    :param generations: List of strings
+    :param tokenizer: tokenizer of model
+    :return: tokens entropy
+    """
     stats = defaultdict(int)
     num_tokens = 0
     for example in generations:
@@ -46,18 +57,17 @@ def calculate_metrics(model,
                       model_ft,
                       tokenizer_ft,
                       model_reward,
-                      tokenizer_reward,
-                      image_name='result'):
+                      tokenizer_reward,):
     """
-    :param model:
-    :param tokenizer:
-    :param model_ft:
-    :param tokenizer_ft:
-    :param model_reward:
-    :param tokenizer_reward:
-    :param image_name:
-    :return:
+    :param model: generative model
+    :param tokenizer: generative model tokenizer
+    :param model_ft: fine-tuned model
+    :param tokenizer_ft: fine-tuned model tokenizer
+    :param model_reward: reward model
+    :param tokenizer_reward: reward model tokenizer
+    :return: None
     """
+
     metrics = {}
 
     samples, reward = generate_and_evaluate(model, tokenizer,

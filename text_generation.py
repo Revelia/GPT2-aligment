@@ -57,7 +57,7 @@ def generate_dataset(model, tokenizer, model_eval, tokenizer_eval, size=512):
     :param model_eval:  reward model
     :param tokenizer_eval:  tokenizer for reward model
     :param size:  size of dataset
-    :return:
+    :return: List of tuples: (sample, reward)
     """
     evaluated_texts = []
     while size > 0:

@@ -7,7 +7,6 @@ import os
 from trl import DPOTrainer
 
 
-
 if __name__ == '__main__':
     loss = sys.argv[1]
     beta = float(sys.argv[2])
