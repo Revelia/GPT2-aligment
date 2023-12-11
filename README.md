@@ -21,15 +21,15 @@ pip install trl
 pip install datasets
 ```
 
-При помощи следующих команд будут сгенерированы данные и подготовлен Dataset
+При помощи следующих команд будут сгенерированы данные и подготовлен Dataset:
 ```
 python3 text_generation.py
 python3 prepare_dataset.py
 ```
-Для обучения и оценки модели с заданным loss=hinge/sigmoid нужно запустить скрипт
+Для обучения и оценки модели с заданным loss=hinge/sigmoid и beta нужно запустить скрипт:
 ```
-python3 main.py loss
-python3 calculate_metrics.py loss
+python3 fine_tune.py loss beta
+python3 calculate_metrics.py loss beta
 ```
 Модели будут сохранены в models, будет построено распределение по метрикм и сохранено в папку results.
 
@@ -39,11 +39,18 @@ python3 calculate_metrics.py loss
 
 ### Генерация
 
-При помощи GPT-2 было сгенерированно 1000 отзывов и посчитан reward для каждого (generate_text.py
+При помощи GPT-2 было сгенерированно 10000 отзывов и посчитан reward для каждого, параметры генерации были выбраны:
+
+```
+max_length=64,
+top_k=50,
+top_p=0.85,
+```
 
 ### Создание датасета
 
-Далее было составлено 2000 пар winner-loser, которые в дальнейшем будут использоваться как датасет для обучения DPO (prepare_dataset.py) 
+Далее было составлено 20000 пар winner-loser, которые в дальнейшем будут использоваться как датасет для обучения DPO.
+Пары выбирались случайным образом, затем тот отзыв у которого выше reward выше.
 
 ### Дообучение
 
@@ -54,6 +61,48 @@ python3 calculate_metrics.py loss
 Посчитали метрики, распределение отзывов по reward, среднее значение reward а также diversity текстов до и после.
 
 ## Результаты
+
+<table>
+<thead>
+  <tr>
+    <th>loss<br></th>
+    <th>beta</th>
+    <th>reward</th>
+    <th>diversity</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td colspan="2">Original Model</td>
+    <td>0.57</td>
+    <td>5.964</td>
+  </tr>
+  <tr>
+    <td rowspan="2">hinge</td>
+    <td>0.1</td>
+    <td>2.7383</td>
+    <td>4.1960<br></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>2.2204</td>
+    <td>4.5310</td>
+  </tr>
+  <tr>
+    <td rowspan="2">sigmoid</td>
+    <td>0.1</td>
+    <td>2.7154</td>
+    <td>4.1485</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>2.7231</td>
+    <td>4.1044</td>
+  </tr>
+</tbody>
+</table>
+
+
 
 TODO
 
