@@ -33,7 +33,7 @@ python3 prepare_dataset.py
 python3 fine_tune.py loss beta
 python3 calculate_metrics.py loss beta
 ```
-Модели будут сохранены в models, будет построено распределение по метрикм и сохранено в папку results.
+Модели будут сохранены в models, будет построено распределение по метрикам и сохраненно в папку results.
 
 ## Pipeline
 
